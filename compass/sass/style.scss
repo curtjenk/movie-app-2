@@ -1,0 +1,30 @@
+$radius : 15px;
+
+.top-row {
+  background: lightblue;
+    border-radius: $radius;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#page-heading {
+  background: lightgrey;
+   border-radius: $radius;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+
+#poster-grid {
+    background: lightblue;
+    border-radius: $radius;
+    img {
+        width: auto;
+        height: 221px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+}
+
+.indent {
+  padding: 0 20px;
+}
