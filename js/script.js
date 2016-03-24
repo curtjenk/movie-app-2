@@ -119,6 +119,10 @@ function populatePosterGrid(data) {
     switch (searchBy) {
         case 'all':
         case 'tv':
+             console.log('----------- TV Search results ----------');
+            console.log(data);
+             newHtml = popGridMovieData(data);
+            break;
         case 'movie':
             newHtml = popGridMovieData(data);
             break;
@@ -148,7 +152,7 @@ function popGridMovieData(data) {
 
         if (posterPath) {
             movieHtml += '<div class="col-md-2 col-sm-2">';
-            movieHtml += '<img ' + imgClassAttr + ' id="' + uniqueId + '" ' + mediaType + ' src="' + imgSrc + '">';
+            movieHtml += '<img ' + imgClassAttr + ' id="' + uniqueId + '" ' + 'media-type="' + mediaType + '" src="' + imgSrc + '">';
             movieHtml += '</div>';
         }
         //Continue "learning" -- populating the typeAheadSource
@@ -172,7 +176,7 @@ function popGridPersonData(data) {
 
             if (posterPath) {
                 newHtml += '<div class="col-md-2 col-sm-2">';
-                newHtml += '<img ' + imgClassAttr + ' id="' + uniqueId + '" ' + mediaType + ' src="' + imgSrc + '">';
+                newHtml += '<img ' + imgClassAttr + ' id="' + uniqueId + '" ' + 'media-type="' + mediaType + '" src="' + imgSrc + '">';
                 newHtml += '</div>';
             }
             //Continue "learning" -- populating the typeAheadSource
@@ -186,6 +190,18 @@ function popGridPersonData(data) {
 $('#poster-grid').on('click', 'div > img', function() {
     // alert('do modal');
     var currImageId = $(this).attr('id');
+    var mediaType = $(this).attr('media-type');
+    switch (mediaType) {
+        case 'tv':
+             console.log('----------- TV poster ----------');
+            break;
+        case 'movie':
+            console.log('----------- Movie poster ----------');
+            break;
+        default:
+             console.log('----------- UNKNOWN poster ----------');
+    }
+
     var infoURL = baseURL + 'movie/' + currImageId + '?' + apiKey;
     var reviewURL = baseURL + 'movie/' + currImageId + '/reviews?' + apiKey;
 
