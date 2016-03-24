@@ -1,5 +1,13 @@
 $radius : 15px;
 
+input[type="text"] {
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px #969696;
+
+}
+select {
+  font-size: 32px;
+}
 .top-row {
   background: lightblue;
     border-radius: $radius;
@@ -27,4 +35,8 @@ $radius : 15px;
 
 .indent {
   padding: 0 20px;
+}
+
+.now-playing {
+  width: 16%;
 }
