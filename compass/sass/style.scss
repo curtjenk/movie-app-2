@@ -1,5 +1,10 @@
 $radius : 15px;
 
+body {
+  background-image: url('../img/[wallcoo.com]_film_AP36029.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 input[type="text"] {
   border-radius: 5px;
   box-shadow: 0 0 5px 1px #969696;
@@ -9,13 +14,13 @@ select {
   font-size: 32px;
 }
 .top-row {
-  background: lightblue;
+  // background: lightblue;
     border-radius: $radius;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 #page-heading {
-  background: lightgrey;
+  // background: lightgrey;
    border-radius: $radius;
    text-align: center;
    margin-bottom: 5px;
@@ -23,7 +28,7 @@ select {
 
 
 #poster-grid {
-    background: lightblue;
+    // background: lightblue;
     border-radius: $radius;
     img {
         width: auto;

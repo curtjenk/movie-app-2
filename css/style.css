@@ -1,36 +1,40 @@
 /* line 3, ../compass/sass/style.scss */
+body {
+  background-image: url("../img/[wallcoo.com]_film_AP36029.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* line 8, ../compass/sass/style.scss */
 input[type="text"] {
   border-radius: 5px;
   box-shadow: 0 0 5px 1px #969696;
 }
 
-/* line 8, ../compass/sass/style.scss */
+/* line 13, ../compass/sass/style.scss */
 select {
   font-size: 32px;
 }
 
-/* line 11, ../compass/sass/style.scss */
+/* line 16, ../compass/sass/style.scss */
 .top-row {
-  background: lightblue;
   border-radius: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-/* line 17, ../compass/sass/style.scss */
+/* line 22, ../compass/sass/style.scss */
 #page-heading {
-  background: lightgrey;
   border-radius: 15px;
   text-align: center;
   margin-bottom: 5px;
 }
 
-/* line 25, ../compass/sass/style.scss */
+/* line 30, ../compass/sass/style.scss */
 #poster-grid {
-  background: lightblue;
   border-radius: 15px;
 }
-/* line 28, ../compass/sass/style.scss */
+/* line 33, ../compass/sass/style.scss */
 #poster-grid img {
   width: auto;
   height: 221px;
@@ -38,12 +42,12 @@ select {
   margin-bottom: 5px;
 }
 
-/* line 36, ../compass/sass/style.scss */
+/* line 41, ../compass/sass/style.scss */
 .indent {
   padding: 0 20px;
 }
 
-/* line 40, ../compass/sass/style.scss */
+/* line 45, ../compass/sass/style.scss */
 .now-playing {
   width: 16%;
 }
