@@ -219,7 +219,7 @@ function popGridPersonData(data) {
             var imgSrc = imageBaseURL + 'w300' + posterPath;
 
             if (posterPath) {
-                newHtml += '<div class="col-md-2 col-sm-2">';
+                newHtml += '<div class="col-md-2 col-sm-2 now-playing">';
                 newHtml += '<img ' + imgClassAttr + ' id="' + uniqueId + '" ' + 'media-type="' + mediaType + '" src="' + imgSrc + '">';
                 newHtml += '</div>';
             }
