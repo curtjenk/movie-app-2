@@ -23,18 +23,20 @@ select {
   margin-bottom: 5px;
 }
 
-/* line 22, ../compass/sass/style.scss */
+/* line 23, ../compass/sass/style.scss */
 #page-heading {
   border-radius: 15px;
   text-align: center;
   margin-bottom: 5px;
+  font-size: 35px;
+  color: black;
 }
 
-/* line 30, ../compass/sass/style.scss */
+/* line 33, ../compass/sass/style.scss */
 #poster-grid {
   border-radius: 15px;
 }
-/* line 33, ../compass/sass/style.scss */
+/* line 36, ../compass/sass/style.scss */
 #poster-grid img {
   width: auto;
   height: 221px;
@@ -42,12 +44,12 @@ select {
   margin-bottom: 5px;
 }
 
-/* line 41, ../compass/sass/style.scss */
+/* line 44, ../compass/sass/style.scss */
 .indent {
   padding: 0 20px;
 }
 
-/* line 45, ../compass/sass/style.scss */
+/* line 48, ../compass/sass/style.scss */
 .now-playing {
   width: 16%;
 }

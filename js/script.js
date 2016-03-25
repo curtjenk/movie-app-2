@@ -36,7 +36,6 @@ $(document).ready(function() {
     });
 
     // ---------- begin Isotope setup ---------------
-    //todo:  uses imagesLoaded function;
     //create Isotope events 
     $("#genre-buttons").on("click", 'input', function() {
         var filter = '';
@@ -48,7 +47,7 @@ $(document).ready(function() {
             var parts = id.split(' ', 3);
             // console.log(parts);
             for (var y = 0; y < parts.length; y++) {
-                if (parts[y].length > 0 ) {
+                if (parts[y].length > 0) {
                     filter += '.' + parts[y];
                 }
             }
@@ -85,16 +84,14 @@ function loadGenreList() {
         });
 
     });
-
-
 }
 
 function search() {
 
     var searchTerm = $('input[type="text').val();
     if (searchTerm.length < 1 || searchTerm === null || searchTerm === "") return;
-    
-    $('#poster-grid').isotope( 'destroy' );
+
+    $('#poster-grid').isotope('destroy');
 
     var searchURL = '';
     var searchBy = $('#search-by').val();
@@ -118,48 +115,64 @@ function search() {
 
 function searchALL(searchTerm) {
     var newHtml = '';
-    //var searchURL = encodeURI(baseURL + methodSearchMulti + searchTerm + '&' + apiKey);
     var searchURL = encodeURI(baseURL + methodSearchTV + searchTerm + '&' + apiKey);
-    //$.getJSON(searchURL, function(data) {
-    //    console.log(data);
-    //});
-
 
     $.getJSON(searchURL, function(data) {
         newHtml += popGridMovieTVData(data, 'tv');
+        $.getJSON(searchURL + '&page=2', function(data) {
+            newHtml += popGridMovieTVData(data, 'tv');
 
-        searchURL = encodeURI(baseURL + methodSearchMovie + searchTerm + '&' + apiKey);
-        $.getJSON(searchURL, function(data) {
-            newHtml += popGridMovieTVData(data, 'movie');
-
-            searchURL = encodeURI(baseURL + methodSearchPerson + searchTerm + '&' + apiKey);
+            searchURL = encodeURI(baseURL + methodSearchMovie + searchTerm + '&' + apiKey);
             $.getJSON(searchURL, function(data) {
-                newHtml += popGridPersonData(data);
-                $('#poster-grid').html(newHtml);
-               initializeIsotope();
-            });
+                newHtml += popGridMovieTVData(data, 'movie');
+                $.getJSON(searchURL + '&page=2', function(data) {
+                    newHtml += popGridMovieTVData(data, 'movie');
 
+                    searchURL = encodeURI(baseURL + methodSearchPerson + searchTerm + '&' + apiKey);
+                    $.getJSON(searchURL, function(data) {
+                        newHtml += popGridPersonData(data);
+                        $.getJSON(searchURL + '&page=2', function(data) {
+                            newHtml += popGridPersonData(data);
+                            $('#poster-grid').html(newHtml);
+                            initializeIsotope();
+                        });
+                    });
+                });
+            });
         });
     });
 }
 
 function searchMovieTV(whichMethod, searchTerm, media) {
+    var newHtml = '';
     var searchURL = encodeURI(baseURL + whichMethod + searchTerm + '&' + apiKey);
     $.getJSON(searchURL, function(data) {
-        var newHtml = popGridMovieTVData(data, media);
+        newHtml = popGridMovieTVData(data, media);
+        $.getJSON(searchURL + '&page=2', function(data) {
+            newHtml += popGridMovieTVData(data, media);
+            $.getJSON(searchURL + '&page=3', function(data) {
+                newHtml += popGridMovieTVData(data, media);
+                $('#poster-grid').html(newHtml);
+                initializeIsotope();
+            });
+        });
 
-        $('#poster-grid').html(newHtml);
-       initializeIsotope();
     });
 }
 
 function searchPerson(searchTerm) {
+    var newHtml = '';
     var searchURL = encodeURI(baseURL + methodSearchPerson + searchTerm + '&' + apiKey);
     $.getJSON(searchURL, function(data) {
-        var newHtml = popGridPersonData(data);
-
-        $('#poster-grid').html(newHtml);
-        initializeIsotope();
+        newHtml = popGridPersonData(data);
+        $.getJSON(searchURL + '&page=2', function(data) {
+            newHtml += popGridPersonData(data);
+            $.getJSON(searchURL + '&page=3', function(data) {
+                newHtml += popGridPersonData(data);
+                $('#poster-grid').html(newHtml);
+                initializeIsotope();
+            });
+        });
     });
 }
 
@@ -192,8 +205,7 @@ function popGridMovieTVData(data, media) {
     }
     return movieHtml;
 }
-//todo: use mediaType to get the correct details to fill the modal
-//todo: show cast in the modal (??maybe)
+
 function popGridPersonData(data) {
     var resultsLength = data.results.length;
     var newHtml = "";
@@ -232,40 +244,35 @@ function getGenreAttrs(dataGenreArray) {
 }
 
 function initializeIsotope() {
-    //alert("initializeIsotope called");
-    //Initialize Isotope ... After every HTML change!!!!
-    //todo:  make this a function
-    
-
+   
     var theGrid = $('#poster-grid').isotope({
         // options
         itemSelector: '.now-playing'
-        //layoutMode: 'fitRows'
+            //layoutMode: 'fitRows'
     });
 
     theGrid.imagesLoaded().progress(function() {
-        // theGrid.isotope();
+        theGrid.isotope('layout');
     });
 }
 
+//get at least three pages for nowPlaying
 function getNowPlaying() {
     var nowPlayingURL = encodeURI(baseURL + methodNowPlaying + '?' + apiKey);
-    // console.log(nowPlayingURL);
+
     $.getJSON(nowPlayingURL, function(movieData) {
         totalPagesNowPlaying = movieData.total_pages;
-        //console.log(movieData);
-        //console.log('Total Pages Now Playing = ' + totalPagesNowPlaying);
         var newHtml = popGridMovieTVData(movieData, 'movie');
-
-        $('#poster-grid').html(newHtml);
-        initializeIsotope();
-
         //get page 2
         $.getJSON(nowPlayingURL + '&page=2', function(movieData) {
+            newHtml += popGridMovieTVData(movieData, 'movie');
             populateTypeAheadSource(movieData);
             //get page 3
             $.getJSON(nowPlayingURL + '&page=3', function(movieData) {
+                newHtml += popGridMovieTVData(movieData, 'movie');
                 populateTypeAheadSource(movieData);
+                $('#poster-grid').html(newHtml);
+                initializeIsotope();
             });
         });
 
